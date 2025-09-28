@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xylence | AI-Powered Startup Intelligence</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================
+           XYLENCE DESIGN SYSTEM
+        ============================================ */
+      :root {
+        --future-dust: #1e293b;
+        --electric-teal: #14b8a6;
+        --neural-gray: #e2e8f0;
+        --xylence-purple: #8b5cf6;
+        --success-green: #10b981;
+        --warning-orange: #fb923c;
+        --deep-space: #0f172a;
+        --light-canvas: #fafbfc;
+
+        /* Extended palette */
+        --glass-white: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --text-dim: #64748b;
+
+        /* Gradients */
+        --gradient-quantum: linear-gradient(
+          135deg,
+          var(--xylence-purple),
+          var(--electric-teal)
+        );
+        --gradient-glow: linear-gradient(
+          135deg,
+          rgba(139, 92, 246, 0.2),
+          rgba(20, 184, 166, 0.2)
+        );
+        --gradient-dark: linear-gradient(180deg, var(--deep-space), #0a0e1a);
+
+        /* Effects */
+        --glow-teal: 0 0 40px rgba(20, 184, 166, 0.6);
+        --glow-purple: 0 0 40px rgba(139, 92, 246, 0.6);
+        --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--deep-space);
+        color: var(--neural-gray);
+        line-height: 1.6;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Xylence background effects */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(139, 92, 246, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(20, 184, 166, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 50% 10%,
+            rgba(139, 92, 246, 0.08) 0%,
+            transparent 40%
+          );
+        pointer-events: none;
+        z-index: 0;
+        animation: xylenceShift 20s ease-in-out infinite;
+      }
+
+      @keyframes xylenceShift {
+        0%,
+        100% {
+          transform: rotate(0deg) scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: rotate(180deg) scale(1.1);
+          opacity: 0.8;
+        }
+      }
+
+      /* Neural Network Background */
+      .neural-network {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        opacity: 0.3;
+        pointer-events: none;
+      }
+
+      .neural-line {
+        position: absolute;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--electric-teal),
+          transparent
+        );
+        animation: pulse-line 3s ease-in-out infinite;
+      }
+
+      @keyframes pulse-line {
+        0%,
+        100% {
+          opacity: 0;
+          transform: scaleX(0);
+        }
+        50% {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+      }
+
+      /* Floating particles */
+      .particles {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--electric-teal);
+        border-radius: 50%;
+        animation: float-up 15s linear infinite;
+        box-shadow: 0 0 10px rgba(20, 184, 166, 0.5);
+      }
+
+      @keyframes float-up {
+        from {
+          transform: translateY(100vh) translateX(0) scale(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+          transform: translateY(90vh) translateX(10px) scale(1);
+        }
+        90% {
+          opacity: 1;
+          transform: translateY(10vh) translateX(-10px) scale(1);
+        }
+        to {
+          transform: translateY(-10vh) translateX(0) scale(0);
+          opacity: 0;
+        }
+      }
+
+      /* ============================================
+           HEADER
+        ============================================ */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 1.5rem 0;
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .logo-container:hover {
+        transform: translateX(5px);
+      }
+
+      .logo-mark {
+        width: 45px;
+        height: 45px;
+        background: var(--gradient-quantum);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: logo-pulse 2s ease-in-out infinite;
+        box-shadow: var(--glow-purple);
+      }
+
+      @keyframes logo-pulse {
+        0%,
+        100% {
+          transform: scale(1) rotate(0deg);
+          box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+        50% {
+          transform: scale(1.05) rotate(5deg);
+          box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+        }
+      }
+
+      .logo-text {
+        font-size: 1.35rem;
+        font-weight: 700;
+        background: var(--gradient-quantum);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+      }
+
+      .header-nav {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .ai-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: var(--glass-white);
+        border: 1px solid var(--glass-border);
+        border-radius: 100px;
+        font-size: 0.875rem;
+        color: var(--electric-teal);
+      }
+
+      .ai-status-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--electric-teal);
+        border-radius: 50%;
+        animation: aiPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes aiPulse {
+        0%,
+        100% {
+          opacity: 1;
+          box-shadow: 0 0 5px var(--electric-teal);
+        }
+        50% {
+          opacity: 0.5;
+          box-shadow: 0 0 10px var(--electric-teal);
+        }
+      }
+
+      /* ============================================
+           HERO SECTION
+        ============================================ */
+      .hero {
+        padding: 12rem 2rem 6rem;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(20, 184, 166, 0.1);
+        border: 1px solid rgba(20, 184, 166, 0.3);
+        padding: 0.5rem 1rem;
+        border-radius: 100px;
+        font-size: 0.875rem;
+        color: var(--electric-teal);
+        margin-bottom: 2rem;
+        animation: badge-glow 2s ease-in-out infinite;
+      }
+
+      @keyframes badge-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(20, 184, 166, 0.4);
+        }
+      }
+
+      .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        background: var(--gradient-quantum);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: title-appear 1s ease-out;
+      }
+
+      @keyframes title-appear {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 3rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+        animation: subtitle-appear 1s ease-out 0.2s both;
+      }
+
+      @keyframes subtitle-appear {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: cta-appear 1s ease-out 0.4s both;
+      }
+
+      @keyframes cta-appear {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ============================================
+           FEATURES GRID
+        ============================================ */
+      .features {
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .features-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: var(--gradient-quantum);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .features-subtitle {
+        text-align: center;
+        color: var(--text-secondary);
+        margin-bottom: 4rem;
+        font-size: 1.125rem;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: rgba(30, 41, 59, 0.3);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-quantum);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+          0 0 60px rgba(20, 184, 166, 0.1);
+        border-color: rgba(20, 184, 166, 0.3);
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-quantum);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+      }
+
+      .feature-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--text-primary);
+      }
+
+      .feature-description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      /* ============================================
+           HOW IT WORKS
+        ============================================ */
+      .how-it-works {
+        padding: 4rem 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .process-timeline {
+        position: relative;
+        padding: 2rem 0;
+      }
+
+      .timeline-line {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          180deg,
+          var(--electric-teal),
+          var(--xylence-purple)
+        );
+        transform: translateX(-50%);
+        opacity: 0.3;
+      }
+
+      .process-step {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4rem;
+        position: relative;
+      }
+
+      .process-step:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      .step-content {
+        flex: 1;
+        padding: 2rem;
+        background: rgba(30, 41, 59, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        position: relative;
+      }
+
+      .process-step:nth-child(odd) .step-content {
+        margin-right: 4rem;
+        text-align: right;
+      }
+
+      .process-step:nth-child(even) .step-content {
+        margin-left: 4rem;
+        text-align: left;
+      }
+
+      .process-step:nth-child(odd) .step-content {
+        justify-items: flex-end;
+      }
+
+      .step-number {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-quantum);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: white;
+        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.5);
+        z-index: 2;
+      }
+
+      .step-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--electric-teal);
+      }
+
+      .step-description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        max-width: 300px;
+      }
+
+      /* ============================================
+           DATA SECURITY
+        ============================================ */
+      .data-security {
+        padding: 4rem 2rem;
+        background: rgba(139, 92, 246, 0.05);
+        border-top: 1px solid rgba(139, 92, 246, 0.2);
+        border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        margin: 4rem 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .security-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .security-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: var(--gradient-quantum);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .security-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .security-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .security-icon {
+        width: 80px;
+        height: 80px;
+        background: rgba(139, 92, 246, 0.1);
+        border: 2px solid rgba(139, 92, 246, 0.3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        animation: security-float 3s ease-in-out infinite;
+      }
+
+      @keyframes security-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .security-item:nth-child(2) .security-icon {
+        animation-delay: 0.5s;
+      }
+
+      .security-item:nth-child(3) .security-icon {
+        animation-delay: 1s;
+      }
+
+      .security-item:nth-child(4) .security-icon {
+        animation-delay: 1.5s;
+      }
+
+      .security-label {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .security-desc {
+        font-size: 0.875rem;
+        color: var(--text-dim);
+      }
+
+      /* ============================================
+           BENEFITS
+        ============================================ */
+      .benefits {
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .benefits-content {
+        padding: 2rem;
+      }
+
+      .benefits-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        background: var(--gradient-quantum);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .benefit-item {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .benefit-item:hover {
+        background: rgba(20, 184, 166, 0.05);
+        transform: translateX(10px);
+      }
+
+      .benefit-check {
+        width: 24px;
+        height: 24px;
+        background: var(--gradient-quantum);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: white;
+        font-size: 0.875rem;
+      }
+
+      .benefit-text {
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .benefits-visual {
+        position: relative;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .quantum-cube {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        transform-style: preserve-3d;
+        animation: rotate-cube 20s linear infinite;
+      }
+
+      @keyframes rotate-cube {
+        from {
+          transform: rotateX(0deg) rotateY(0deg);
+        }
+        to {
+          transform: rotateX(360deg) rotateY(360deg);
+        }
+      }
+
+      .cube-face {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(20, 184, 166, 0.1);
+        border: 2px solid rgba(20, 184, 166, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        opacity: 0.7;
+      }
+
+      /* ============================================
+           TERMS SECTION
+        ============================================ */
+      .terms-section {
+        padding: 4rem 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .terms-card {
+        background: rgba(30, 41, 59, 0.3);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: var(--glass-shadow);
+      }
+
+      .terms-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-align: center;
+        background: var(--gradient-quantum);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .terms-content {
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      .terms-content::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .terms-content::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+
+      .terms-content::-webkit-scrollbar-thumb {
+        background: var(--electric-teal);
+        border-radius: 4px;
+      }
+
+      .terms-text {
+        color: var(--text-secondary);
+        line-height: 1.8;
+        font-size: 0.95rem;
+      }
+
+      .terms-text h3 {
+        color: var(--text-primary);
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        font-size: 1.125rem;
+      }
+
+      .terms-text ul {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .terms-text li {
+        margin-bottom: 0.5rem;
+      }
+
+      .checkbox-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background: rgba(20, 184, 166, 0.05);
+        border: 1px solid rgba(20, 184, 166, 0.2);
+        border-radius: 12px;
+      }
+
+      .custom-checkbox {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .custom-checkbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      .checkbox-mark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 24px;
+        width: 24px;
+        background: rgba(30, 41, 59, 0.5);
+        border: 2px solid var(--electric-teal);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .custom-checkbox input:checked ~ .checkbox-mark {
+        background: var(--gradient-quantum);
+        border-color: transparent;
+      }
+
+      .checkbox-mark:after {
+        content: '';
+        position: absolute;
+        display: none;
+        left: 7px;
+        top: 3px;
+        width: 6px;
+        height: 11px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+
+      .custom-checkbox input:checked ~ .checkbox-mark:after {
+        display: block;
+      }
+
+      .checkbox-label {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        cursor: pointer;
+      }
+
+      .checkbox-label a {
+        color: var(--electric-teal);
+        text-decoration: underline;
+        transition: color 0.3s ease;
+      }
+
+      .checkbox-label a:hover {
+        color: var(--xylence-purple);
+      }
+
+      /* ============================================
+           BUTTONS
+        ============================================ */
+      .btn {
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: -0.01em;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .btn:hover::before {
+        transform: translateX(100%);
+      }
+
+      .btn-primary {
+        background: var(--gradient-quantum);
+        color: white;
+        box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+        font-size: 1.125rem;
+        padding: 1.25rem 2.5rem;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4);
+      }
+
+      .btn-primary:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none !important;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--text-primary);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--electric-teal);
+        transform: translateY(-2px);
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ============================================
+           STATS
+        ============================================ */
+      .stats {
+        padding: 4rem 2rem;
+        background: linear-gradient(
+          180deg,
+          transparent,
+          rgba(20, 184, 166, 0.05),
+          transparent
+        );
+        position: relative;
+        z-index: 1;
+      }
+
+      .stats-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .stat-card {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(30, 41, 59, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(20, 184, 166, 0.3);
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        background: var(--gradient-quantum);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        color: var(--text-secondary);
+        font-size: 1rem;
+      }
+
+      /* ============================================
+           FOOTER
+        ============================================ */
+      .footer {
+        padding: 2rem;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-text {
+        color: var(--text-dim);
+        font-size: 0.875rem;
+      }
+
+      /* ============================================
+           RESPONSIVE
+        ============================================ */
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.125rem;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline-line {
+          display: none;
+        }
+
+        .process-step {
+          flex-direction: column !important;
+        }
+
+        .process-step:nth-child(odd) .step-content,
+        .process-step:nth-child(even) .step-content {
+          margin: 0;
+          text-align: left;
+        }
+
+        .step-number {
+          position: relative;
+          left: 0;
+          transform: none;
+          margin-bottom: 1rem;
+        }
+
+        .terms-card {
+          padding: 2rem 1.5rem;
+        }
+      }
+
+      /* ============================================
+           ANIMATIONS
+        ============================================ */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .scale-in {
+        transform: scale(0.9);
+        opacity: 0;
+        animation: scaleIn 0.5s ease forwards;
+      }
+
+      @keyframes scaleIn {
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Neural Network Background -->
+    <div class="neural-network" id="neuralNetwork"></div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-container">
+          <div class="logo-mark">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 22V12"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 12L2 7"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 12L22 7"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div class="logo-text">Xylence Assessment</div>
+        </div>
+        <nav class="header-nav">
+          <div class="ai-status">
+            <div class="ai-status-dot"></div>
+            <span>AI Processing Active</span>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span>🚀</span>
+        <span>Powered by Xylence AI</span>
+      </div>
+      <h1 class="hero-title">
+        El Futuro del Análisis<br />
+        de Startups está Aquí
+      </h1>
+      <p class="hero-subtitle">
+        Utilizamos inteligencia artificial cuántica para evaluar el potencial de
+        tu startup y conectarte con los inversores perfectos en tiempo real
+      </p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" onclick="scrollToTerms()">
+          Comenzar Evaluación <span>⚡</span>
+        </button>
+        <button class="btn btn-secondary" onclick="showDemo()">
+          Ver Demo <span>▶️</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-number">2,847</div>
+          <div class="stat-label">Startups Analizadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">$142M</div>
+          <div class="stat-label">Capital Levantado</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">89%</div>
+          <div class="stat-label">Precisión del Modelo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">VCs Conectados</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <h2 class="features-title">Por qué Elegirnos</h2>
+      <p class="features-subtitle">
+        La plataforma más avanzada para el análisis predictivo de startups
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3 class="feature-title">IA Cuántica Avanzada</h3>
+          <p class="feature-description">
+            Nuestro modelo analiza +1000 variables en tiempo real, desde
+            métricas financieras hasta señales comportamentales, prediciendo el
+            éxito con 89% de precisión.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3 class="feature-title">Seguridad Nivel Bancario</h3>
+          <p class="feature-description">
+            Encriptación AES-256, cumplimiento GDPR/CCPA. Tu información está
+            protegida con los mismos estándares que usan los bancos
+            internacionales.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">Resultados Instantáneos</h3>
+          <p class="feature-description">
+            Obtén tu Xylence Score y análisis completo en menos de 60 segundos.
+            Sin esperas, sin fricciones, solo insights accionables.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3 class="feature-title">VC Matching Inteligente</h3>
+          <p class="feature-description">
+            Conectamos tu startup con los inversores ideales basándonos en fit
+            real, no solo en industria. Aumenta 3x tus probabilidades de
+            funding.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3 class="feature-title">Tracking Continuo</h3>
+          <p class="feature-description">
+            Dashboard en tiempo real que evoluciona con tu startup. Visualiza tu
+            progreso, identifica mejoras y optimiza tu score continuamente.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3 class="feature-title">Network Global</h3>
+          <p class="feature-description">
+            Acceso a una red de +500 VCs verificados globalmente. Desde
+            micro-fondos hasta tier-1, encuentra el partner perfecto para tu
+            etapa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+      <h2 class="features-title">Cómo Funciona</h2>
+      <p class="features-subtitle">
+        Un proceso simple, resultados extraordinarios
+      </p>
+
+      <div class="process-timeline">
+        <div class="timeline-line"></div>
+
+        <div class="process-step">
+          <div class="step-content">
+            <h3 class="step-title">Upload Inteligente</h3>
+            <p class="step-description">
+              Sube tu pitch deck y graba un video de 2 minutos. Nuestra IA
+              extrae automáticamente la información clave sin que tengas que
+              llenar formularios extensos.
+            </p>
+          </div>
+          <div class="step-number">1</div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-content">
+            <h3 class="step-title">Análisis Cuántico</h3>
+            <p class="step-description">
+              Procesamos tu información con 12 modelos de ML simultáneos,
+              analizando desde unit economics hasta founder-market fit en
+              segundos.
+            </p>
+          </div>
+          <div class="step-number">2</div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-content">
+            <h3 class="step-title">Score & Insights</h3>
+            <p class="step-description">
+              Recibe tu Xylence Score y un reporte detallado con fortalezas,
+              áreas de mejora y recomendaciones específicas para tu industria.
+            </p>
+          </div>
+          <div class="step-number">3</div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-content">
+            <h3 class="step-title">VC Matching</h3>
+            <p class="step-description">
+              Te conectamos automáticamente con VCs que han invertido en
+              startups similares y están activamente buscando oportunidades como
+              la tuya.
+            </p>
+          </div>
+          <div class="step-number">4</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Security Section -->
+    <section class="data-security">
+      <div class="security-container">
+        <h2 class="security-title">Tu Información, Nuestra Prioridad</h2>
+        <p class="features-subtitle">
+          Entendemos lo valiosa que es tu información. Por eso implementamos los
+          más altos estándares de seguridad y privacidad en la industria.
+        </p>
+
+        <div class="security-grid">
+          <div class="security-item">
+            <div class="security-icon">🔒</div>
+            <div class="security-label">Encriptación End-to-End</div>
+            <div class="security-desc">AES-256 + TLS 1.3</div>
+          </div>
+
+          <div class="security-item">
+            <div class="security-icon">🛡️</div>
+            <div class="security-label">Compliance Total</div>
+            <div class="security-desc">GDPR, CCPA, SOC2</div>
+          </div>
+
+          <div class="security-item">
+            <div class="security-icon">👁️</div>
+            <div class="security-label">Control Granular</div>
+            <div class="security-desc">Tú decides qué compartir</div>
+          </div>
+
+          <div class="security-item">
+            <div class="security-icon">🗑️</div>
+            <div class="security-label">Derecho al Olvido</div>
+            <div class="security-desc">Elimina todo en 1 clic</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+      <div class="benefits-grid">
+        <div class="benefits-content">
+          <h2 class="benefits-title">Ventajas Exclusivas</h2>
+
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Sin costo inicial:</strong> Comienza gratis, paga solo
+              cuando necesites features premium o conexiones directas con VCs.
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Feedback accionable:</strong> No solo un score, sino un
+              roadmap claro de cómo mejorar tu propuesta y aumentar tus
+              probabilidades.
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Visibilidad garantizada:</strong> Tu perfil es visto por
+              al menos 10 VCs relevantes en las primeras 48 horas.
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Benchmarking real:</strong> Compárate con startups
+              exitosas de tu industria y etapa. Aprende de los mejores.
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Updates automáticos:</strong> Conecta tus herramientas y
+              mantén tu perfil actualizado sin esfuerzo adicional.
+            </div>
+          </div>
+        </div>
+
+        <div class="benefits-visual">
+          <div class="quantum-cube">
+            <div class="cube-face" style="transform: translateZ(150px)">🚀</div>
+            <div
+              class="cube-face"
+              style="transform: rotateY(90deg) translateZ(150px)"
+            >
+              💎
+            </div>
+            <div
+              class="cube-face"
+              style="transform: rotateY(180deg) translateZ(150px)"
+            >
+              ⚡
+            </div>
+            <div
+              class="cube-face"
+              style="transform: rotateY(-90deg) translateZ(150px)"
+            >
+              🎯
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Terms and Conditions -->
+    <section class="terms-section" id="termsSection">
+      <div class="terms-card">
+        <h2 class="terms-title">Términos y Privacidad</h2>
+
+        <div class="terms-content">
+          <div class="terms-text">
+            <h3>📋 Términos de Servicio</h3>
+            <ul>
+              <li>La plataforma es gratuita para el análisis inicial</li>
+              <li>
+                Los datos se usan exclusivamente para mejorar tu score y
+                conectarte con inversores
+              </li>
+              <li>
+                Tienes control total sobre la visibilidad de tu información
+              </li>
+              <li>Puedes eliminar tu cuenta y datos en cualquier momento</li>
+            </ul>
+
+            <h3>🔐 Política de Privacidad</h3>
+            <ul>
+              <li>
+                Encriptamos toda tu información con estándares bancarios
+                (AES-256)
+              </li>
+              <li>
+                Nunca vendemos ni compartimos tus datos con terceros sin tu
+                consentimiento
+              </li>
+              <li>
+                Cumplimos con GDPR, CCPA y regulaciones internacionales de
+                privacidad
+              </li>
+              <li>
+                Solo los VCs que tú apruebes pueden ver tu información completa
+              </li>
+            </ul>
+
+            <h3>🤖 Uso de IA</h3>
+            <ul>
+              <li>
+                Nuestra IA analiza patrones para predecir éxito, no toma
+                decisiones finales
+              </li>
+              <li>
+                Los modelos se entrenan con datos agregados y anonimizados
+              </li>
+              <li>
+                Tu información específica nunca se usa para entrenar modelos
+                públicos
+              </li>
+              <li>
+                Tienes derecho a solicitar explicación de cualquier análisis
+              </li>
+            </ul>
+
+            <h3>💼 Para Inversores</h3>
+            <ul>
+              <li>
+                Los VCs verificados pueden acceder a perfiles según el nivel de
+                privacidad elegido
+              </li>
+              <li>Prohibido el scraping o uso automatizado de la plataforma</li>
+              <li>Las conexiones requieren consentimiento mutuo</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="checkbox-container">
+          <label class="custom-checkbox">
+            <input type="checkbox" id="acceptTerms" />
+            <span class="checkbox-mark"></span>
+          </label>
+          <label class="checkbox-label" for="acceptTerms">
+            Acepto los
+            <a href="#" onclick="event.preventDefault()"
+              >Términos de Servicio</a
+            >
+            y la
+            <a href="#" onclick="event.preventDefault()"
+              >Política de Privacidad</a
+            >. Entiendo que mi información será procesada con IA para generar
+            insights y conectarme con inversores relevantes.
+          </label>
+        </div>
+
+        <div class="btn-group">
+          <button
+            class="btn btn-primary"
+            id="startBtn"
+            disabled
+            onclick="startAssessment()"
+          >
+            Iniciar Evaluación <span>🚀</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-text">
+        © 2024 Xylence Assessment. Building the future of startup intelligence.
+      </p>
+    </footer>
+
+    <script>
+      // Initialize particles and animations
+      document.addEventListener('DOMContentLoaded', function () {
+        // Create particles
+        createParticles();
+
+        // Create neural network lines
+        createNeuralNetwork();
+
+        // Enable/disable start button based on checkbox
+        const acceptTerms = document.getElementById('acceptTerms');
+        const startBtn = document.getElementById('startBtn');
+
+        acceptTerms.addEventListener('change', function () {
+          startBtn.disabled = !this.checked;
+          if (this.checked) {
+            startBtn.classList.add('scale-in');
+          }
+        });
+
+        // Animate elements on scroll
+        observeElements();
+      });
+
+      // Create floating particles
+      function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 15; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.animationDelay = Math.random() * 15 + 's';
+          particle.style.animationDuration = 15 + Math.random() * 10 + 's';
+
+          // Vary particle colors
+          if (i % 3 === 0) {
+            particle.style.background = 'var(--xylence-purple)';
+            particle.style.boxShadow = '0 0 10px rgba(139, 92, 246, 0.5)';
+          }
+
+          container.appendChild(particle);
+        }
+      }
+
+      // Create neural network effect
+      function createNeuralNetwork() {
+        const container = document.getElementById('neuralNetwork');
+        for (let i = 0; i < 5; i++) {
+          const line = document.createElement('div');
+          line.className = 'neural-line';
+          line.style.top = Math.random() * 100 + '%';
+          line.style.left = Math.random() * 100 + '%';
+          line.style.width = 100 + Math.random() * 200 + 'px';
+          line.style.transform = `rotate(${Math.random() * 360}deg)`;
+          line.style.animationDelay = Math.random() * 3 + 's';
+          container.appendChild(line);
+        }
+      }
+
+      // Scroll to terms section
+      function scrollToTerms() {
+        document.getElementById('termsSection').scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }
+
+      // Show demo (placeholder)
+      function showDemo() {
+        alert(
+          'Demo interactivo próximamente. Por ahora, ¡comienza tu evaluación gratis!'
+        );
+      }
+
+      // Start assessment
+      function startAssessment() {
+        // Save acceptance to localStorage
+        localStorage.setItem('termsAccepted', 'true');
+        localStorage.setItem('acceptedAt', new Date().toISOString());
+
+        // Redirect to the form
+        window.location.href = 'index.html';
+      }
+
+      // Observe elements for animations
+      function observeElements() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach((card) => {
+          observer.observe(card);
+        });
+
+        // Observe process steps
+        document.querySelectorAll('.process-step').forEach((step) => {
+          observer.observe(step);
+        });
+      }
+
+      // Add some interactivity to the cube
+      const cube = document.querySelector('.quantum-cube');
+      if (cube) {
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+          mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+          mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+
+          if (cube) {
+            cube.style.transform = `rotateX(${mouseY * 30}deg) rotateY(${
+              mouseX * 30
+            }deg)`;
+          }
+        });
+      }
+
+      // Add smooth parallax effect
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('body::before');
+        const speed = 0.5;
+
+        if (parallax) {
+          parallax.style.transform = `translateY(${scrolled * speed}px)`;
+        }
+      });
+    </script>
+  </body>
+</html>
