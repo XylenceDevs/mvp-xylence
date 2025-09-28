@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xylence - Future Builders</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+      :root {
+        --future-dust: #1e293b;
+        --electric-teal: #14b8a6;
+        --neural-gray: #e2e8f0;
+        --quantum-purple: #8b5cf6;
+        --success-green: #10b981;
+        --warning-orange: #fb923c;
+        --deep-space: #0f172a;
+        --light-canvas: #fafbfc;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--deep-space);
+        color: var(--neural-gray);
+        line-height: 1.6;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(139, 92, 246, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(20, 184, 166, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .mono {
+        font-family: 'Courier New', monospace;
+        letter-spacing: 0.05em;
+      }
+
+      /* Navigation */
+      nav {
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1.5rem 5%;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: linear-gradient(
+          135deg,
+          var(--electric-teal),
+          var(--quantum-purple)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: var(--neural-gray);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--electric-teal),
+          var(--quantum-purple)
+        );
+        transition: width 0.3s;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--electric-teal),
+          var(--quantum-purple)
+        );
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.5s, height 0.5s;
+      }
+
+      .btn-primary:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 6rem 5%;
+        position: relative;
+        overflow: hidden;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .neural-network {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        top: 0;
+        left: 0;
+      }
+
+      .node {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: var(--electric-teal);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--electric-teal);
+        animation: pulse-node 3s infinite;
+      }
+
+      @keyframes pulse-node {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.5);
+          opacity: 1;
+        }
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(
+          135deg,
+          var(--electric-teal),
+          var(--quantum-purple),
+          var(--electric-teal)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 200% 200%;
+        animation: gradient-shift 3s ease infinite;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+      }
+
+      @keyframes gradient-shift {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .subtitle {
+        font-size: 1.25rem;
+        color: var(--neural-gray);
+        margin-bottom: 2rem;
+      }
+
+      .ai-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .thinking-dots {
+        display: flex;
+        gap: 4px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        background: var(--quantum-purple);
+        border-radius: 50%;
+        animation: thinking 1.4s infinite;
+      }
+
+      .dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes thinking {
+        0%,
+        60%,
+        100% {
+          transform: scale(0.8);
+          opacity: 0.5;
+        }
+        30% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+
+      /* Bento Box Grid */
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        height: 400px;
+      }
+
+      .bento-card {
+        background: rgba(30, 41, 59, 0.5);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+      }
+
+      .bento-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--electric-teal),
+          transparent
+        );
+        animation: scan 3s linear infinite;
+      }
+
+      @keyframes scan {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .bento-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--electric-teal);
+        box-shadow: 0 10px 40px rgba(20, 184, 166, 0.2);
+      }
+
+      .bento-card.large {
+        grid-column: span 2;
+      }
+
+      .metric-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          var(--electric-teal),
+          var(--quantum-purple)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 0.5rem;
+      }
+
+      .metric-label {
+        color: var(--neural-gray);
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .live-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--success-green);
+        font-size: 0.75rem;
+        margin-top: 0.5rem;
+      }
+
+      .live-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--success-green);
+        border-radius: 50%;
+        animation: blink 2s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      /* Projects Section */
+      .projects {
+        padding: 4rem 5%;
+        position: relative;
+        z-index: 1;
+      }
+
+      .section-header {
+        max-width: 1200px;
+        margin: 0 auto 3rem;
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+          135deg,
+          var(--electric-teal),
+          var(--quantum-purple)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .projects-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: rgba(30, 41, 59, 0.5);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(20, 184, 166, 0.2);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s;
+        position: relative;
+      }
+
+      .project-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(20, 184, 166, 0.1),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .project-card:hover::after {
+        left: 100%;
+      }
+
+      .project-card:hover {
+        transform: scale(1.02);
+        border-color: var(--electric-teal);
+      }
+
+      .project-header {
+        padding: 1.5rem;
+        background: rgba(139, 92, 246, 0.1);
+        position: relative;
+      }
+
+      .project-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--quantum-purple);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .project-content {
+        padding: 1.5rem;
+      }
+
+      .project-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-description {
+        color: var(--neural-gray);
+        margin-bottom: 1.5rem;
+        font-size: 0.875rem;
+      }
+
+      .progress-container {
+        margin-bottom: 1rem;
+      }
+
+      .progress-bar {
+        background: rgba(20, 184, 166, 0.1);
+        height: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--electric-teal),
+          var(--quantum-purple)
+        );
+        border-radius: 5px;
+        position: relative;
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          opacity: 0.8;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.8;
+        }
+      }
+
+      .project-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .stat-value {
+        font-weight: 600;
+        color: var(--electric-teal);
+        font-size: 1.125rem;
+        display: block;
+      }
+
+      /* AI Features */
+      .ai-features {
+        padding: 4rem 5%;
+        position: relative;
+        z-index: 1;
+      }
+
+      .features-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: rgba(30, 41, 59, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(20, 184, 166, 0.1) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .feature-card:hover::before {
+        opacity: 1;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--electric-teal);
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1rem;
+        background: linear-gradient(
+          135deg,
+          var(--electric-teal),
+          var(--quantum-purple)
+        );
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+      }
+
+      .feature-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+
+      .feature-description {
+        color: var(--neural-gray);
+        font-size: 0.875rem;
+      }
+
+      /* Data Flow Animation */
+      .data-flow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        opacity: 0.05;
+        z-index: 0;
+      }
+
+      .flow-line {
+        position: absolute;
+        width: 2px;
+        height: 100px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--electric-teal),
+          transparent
+        );
+        animation: flow 4s linear infinite;
+      }
+
+      @keyframes flow {
+        0% {
+          transform: translateY(-100px);
+        }
+        100% {
+          transform: translateY(100vh);
+        }
+      }
+
+      /* Footer */
+      footer {
+        padding: 3rem 5%;
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(139, 92, 246, 0.2);
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Dark Mode Toggle */
+      .theme-toggle {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: linear-gradient(
+          135deg,
+          var(--electric-teal),
+          var(--quantum-purple)
+        );
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(20, 184, 166, 0.4);
+        transition: all 0.3s;
+        z-index: 1000;
+      }
+
+      .theme-toggle:hover {
+        transform: scale(1.1) rotate(180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Data Flow Background -->
+    <div class="data-flow">
+      <div class="flow-line" style="left: 10%; animation-delay: 0s"></div>
+      <div class="flow-line" style="left: 25%; animation-delay: 1s"></div>
+      <div class="flow-line" style="left: 40%; animation-delay: 2s"></div>
+      <div class="flow-line" style="left: 55%; animation-delay: 3s"></div>
+      <div class="flow-line" style="left: 70%; animation-delay: 0.5s"></div>
+      <div class="flow-line" style="left: 85%; animation-delay: 1.5s"></div>
+    </div>
+
+    <nav>
+      <div class="nav-container">
+        <div class="logo">Xylence</div>
+        <div class="nav-menu">
+          <a href="#" class="nav-link">Explorar</a>
+          <a href="#" class="nav-link">Tecnología</a>
+          <a href="#" class="nav-link">Para Builders</a>
+          <a href="#" class="nav-link">Para VCs</a>
+          <a href="#" class="btn-primary">Launch App</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="neural-network">
+        <div class="node" style="top: 20%; left: 10%"></div>
+        <div class="node" style="top: 40%; left: 25%"></div>
+        <div class="node" style="top: 60%; left: 15%"></div>
+        <div class="node" style="top: 30%; left: 80%"></div>
+        <div class="node" style="top: 70%; left: 90%"></div>
+        <div class="node" style="top: 50%; left: 50%"></div>
+      </div>
+
+      <div class="hero-content">
+        <div>
+          <div class="ai-indicator">
+            <span style="color: var(--quantum-purple); font-weight: 600"
+              >AI Processing</span
+            >
+            <div class="thinking-dots">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
+          <h1>Build the Future,<br />Fund Tomorrow</h1>
+          <p class="subtitle">
+            Plataforma de próxima generación potenciada por
+            inteligencia artificial cuántica y análisis predictivo en tiempo
+            real.
+          </p>
+            <a href="/pulse/onboarding.html" class="btn-primary">Start Building →</a>
+        </div>
+
+        <div class="bento-grid">
+          <div class="bento-card">
+            <div class="metric-value mono">$1.2B+</div>
+            <div class="metric-label">Total Value Locked</div>
+            <div class="live-indicator">
+              <span class="live-dot"></span>
+              <span>LIVE</span>
+            </div>
+          </div>
+          <div class="bento-card">
+            <div class="metric-value mono">94.7%</div>
+            <div class="metric-label">AI Accuracy</div>
+            <div class="live-indicator">
+              <span class="live-dot"></span>
+              <span>PROCESSING</span>
+            </div>
+          </div>
+          <div class="bento-card large">
+            <canvas id="dataViz" style="width: 100%; height: 150px"></canvas>
+            <div class="metric-label">Real-time Investment Flow</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects">
+      <div class="section-header">
+        <h2>Featured Innovations</h2>
+        <p>Proyectos verificados por smart contracts y análisis cuántico</p>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-badge">🔥 HOT</div>
+            <h3 class="project-title">Xylence Finance Protocol</h3>
+          </div>
+          <div class="project-content">
+            <p class="project-description">
+              DeFi 3.0 protocol with quantum-resistant encryption and AI-powered
+              yield optimization.
+            </p>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="project-stats">
+              <div>
+                <span class="stat-value mono">$2.4M</span>
+                <div class="metric-label">Raised</div>
+              </div>
+              <div>
+                <span class="stat-value mono">85%</span>
+                <div class="metric-label">Funded</div>
+              </div>
+              <div>
+                <span class="stat-value mono">7d</span>
+                <div class="metric-label">Left</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-badge">⚡ FAST</div>
+            <h3 class="project-title">Neural Health Systems</h3>
+          </div>
+          <div class="project-content">
+            <p class="project-description">
+              Brain-computer interfaces for medical diagnostics with 99.8%
+              accuracy using quantum ML.
+            </p>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 92%"></div>
+              </div>
+            </div>
+            <div class="project-stats">
+              <div>
+                <span class="stat-value mono">$3.7M</span>
+                <div class="metric-label">Raised</div>
+              </div>
+              <div>
+                <span class="stat-value mono">92%</span>
+                <div class="metric-label">Funded</div>
+              </div>
+              <div>
+                <span class="stat-value mono">3d</span>
+                <div class="metric-label">Left</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-badge">🚀 NEW</div>
+            <h3 class="project-title">MetaVerse Infrastructure</h3>
+          </div>
+          <div class="project-content">
+            <p class="project-description">
+              Decentralized computing network for immersive virtual experiences
+              at planetary scale.
+            </p>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 34%"></div>
+              </div>
+            </div>
+            <div class="project-stats">
+              <div>
+                <span class="stat-value mono">$680K</span>
+                <div class="metric-label">Raised</div>
+              </div>
+              <div>
+                <span class="stat-value mono">34%</span>
+                <div class="metric-label">Funded</div>
+              </div>
+              <div>
+                <span class="stat-value mono">21d</span>
+                <div class="metric-label">Left</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-features">
+      <div class="section-header">
+        <h2>Xylence AI Infrastructure</h2>
+        <p>Tecnología invisible, resultados visibles</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3 class="feature-title">Neural Analytics</h3>
+          <p class="feature-description">
+            Deep learning models analyzing 10M+ data points per second
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚛️</div>
+          <h3 class="feature-title">Xylence Processing</h3>
+          <p class="feature-description">
+            Xylence algorithms for optimal portfolio distribution
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔮</div>
+          <h3 class="feature-title">Predictive Models</h3>
+          <p class="feature-description">
+            94.7% accuracy in project success prediction
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3 class="feature-title">Smart Security</h3>
+          <p class="feature-description">
+            Zero-knowledge proofs and quantum encryption
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 FundVenture. Building tomorrow's economy, today.</p>
+    </footer>
+
+    <div class="theme-toggle">
+      <span style="font-size: 1.5rem">🌙</span>
+    </div>
+
+    <script>
+      // Simple canvas animation for data visualization
+      const canvas = document.getElementById('dataViz');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        let points = [];
+        for (let i = 0; i < 20; i++) {
+          points.push({
+            x: i * (canvas.width / 20),
+            y: Math.random() * canvas.height,
+          });
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          // Draw line
+          ctx.beginPath();
+          ctx.strokeStyle = '#14B8A6';
+          ctx.lineWidth = 2;
+
+          for (let i = 0; i < points.length; i++) {
+            if (i === 0) {
+              ctx.moveTo(points[i].x, points[i].y);
+            } else {
+              ctx.lineTo(points[i].x, points[i].y);
+            }
+
+            // Update points
+            points[i].y += (Math.random() - 0.5) * 5;
+            if (points[i].y < 20) points[i].y = 20;
+            if (points[i].y > canvas.height - 20)
+              points[i].y = canvas.height - 20;
+          }
+
+          ctx.stroke();
+
+          // Draw gradient fill
+          const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+          gradient.addColorStop(0, 'rgba(20, 184, 166, 0.2)');
+          gradient.addColorStop(1, 'rgba(20, 184, 166, 0)');
+
+          ctx.lineTo(canvas.width, canvas.height);
+          ctx.lineTo(0, canvas.height);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+
+          requestAnimationFrame(animate);
+        }
+
+        animate();
+      }
+    </script>
+  </body>
+</html>
