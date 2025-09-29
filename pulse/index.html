@@ -30,7 +30,7 @@
         --text-dim: #64748b;
 
         /* Gradients */
-        --gradient-quantum: linear-gradient(
+        --gradient-xylence: linear-gradient(
           135deg,
           var(--xylence-purple),
           var(--electric-teal)
@@ -181,7 +181,7 @@
       .logo-mark {
         width: 40px;
         height: 40px;
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         border-radius: 12px;
         display: flex;
         align-items: center;
@@ -205,7 +205,7 @@
       .logo-text {
         font-size: 1.25rem;
         font-weight: 700;
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -303,7 +303,7 @@
         transform: translate(-50%, -50%);
         font-size: 2rem;
         font-weight: 700;
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -333,7 +333,7 @@
         top: 0;
         left: 0;
         height: 100%;
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
       }
@@ -364,7 +364,7 @@
       }
 
       .step.active .step-circle {
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         border-color: transparent;
         color: white;
         box-shadow: var(--glow-teal);
@@ -479,7 +479,7 @@
         width: 60px;
         height: 60px;
         margin: 0 auto 1rem;
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         border-radius: 16px;
         display: flex;
         align-items: center;
@@ -492,7 +492,7 @@
         font-size: 2rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -718,7 +718,7 @@
       .file-icon {
         width: 40px;
         height: 40px;
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         border-radius: 10px;
         display: flex;
         align-items: center;
@@ -938,7 +938,7 @@
       }
 
       .btn-primary {
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         color: white;
         box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
       }
@@ -1032,7 +1032,7 @@
       .score-value {
         font-size: 4rem;
         font-weight: 800;
-        background: var(--gradient-quantum);
+        background: var(--gradient-xylence);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -1230,6 +1230,505 @@
         color: var(--text-secondary);
         font-size: 0.875rem;
         white-space: nowrap;
+      }
+
+      /* ============================================
+           REGISTRATION MODAL
+        ============================================ */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(20px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 4000;
+        padding: 2rem;
+        animation: modalFadeIn 0.3s ease;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+      }
+
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          backdrop-filter: blur(0);
+        }
+        to {
+          opacity: 1;
+          backdrop-filter: blur(20px);
+        }
+      }
+
+      .modal-container {
+        background: rgba(30, 41, 59, 0.9);
+        backdrop-filter: blur(40px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 3rem;
+        max-width: 500px;
+        width: 100%;
+        position: relative;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+          0 0 100px rgba(139, 92, 246, 0.1),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+        animation: modalSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      @keyframes modalSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        color: var(--text-secondary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .modal-close:hover {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+        transform: rotate(90deg);
+      }
+
+      /* Success Animation */
+      .modal-success-animation {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+
+      .success-orb {
+        position: relative;
+        width: 100px;
+        height: 100px;
+      }
+
+      .success-orb-inner {
+        position: absolute;
+        inset: 20px;
+        background: var(--gradient-xylence);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: successPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes successPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 30px rgba(20, 184, 166, 0.5);
+        }
+        50% {
+          transform: scale(1.1);
+          box-shadow: 0 0 50px rgba(20, 184, 166, 0.8);
+        }
+      }
+
+      .success-icon {
+        font-size: 2rem;
+        animation: bounce 1s ease infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .success-rings {
+        position: absolute;
+        inset: 0;
+        border: 2px solid var(--electric-teal);
+        border-radius: 50%;
+        opacity: 0.5;
+        animation: ringExpand 2s ease-in-out infinite;
+      }
+
+      @keyframes ringExpand {
+        0% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      /* Modal Score */
+      .modal-score {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .modal-score-title {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .modal-score-value {
+        font-size: 4rem;
+        font-weight: 800;
+        background: var(--gradient-xylence);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        animation: countUp 1s ease-out;
+      }
+
+      @keyframes countUp {
+        from {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .modal-score-badge {
+        display: inline-block;
+        background: rgba(20, 184, 166, 0.1);
+        border: 1px solid rgba(20, 184, 166, 0.3);
+        color: var(--electric-teal);
+        padding: 0.375rem 1rem;
+        border-radius: 100px;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      /* Modal Benefits */
+      .modal-benefits {
+        margin-bottom: 2rem;
+      }
+
+      .modal-subtitle {
+        color: var(--text-primary);
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .modal-benefit-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .modal-benefit {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .modal-benefit:hover {
+        background: rgba(20, 184, 166, 0.05);
+        border-color: rgba(20, 184, 166, 0.2);
+        transform: translateX(5px);
+      }
+
+      .benefit-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(139, 92, 246, 0.1);
+        border-radius: 10px;
+        flex-shrink: 0;
+      }
+
+      .benefit-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .benefit-content strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      .benefit-detail {
+        font-size: 0.875rem;
+        color: var(--text-dim);
+      }
+
+      /* Preview Card */
+      .modal-preview {
+        margin-bottom: 2rem;
+      }
+
+      .preview-card {
+        background: linear-gradient(
+          135deg,
+          rgba(139, 92, 246, 0.1),
+          rgba(20, 184, 166, 0.1)
+        );
+        border: 1px solid rgba(20, 184, 166, 0.3);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        animation: previewGlow 3s ease-in-out infinite;
+      }
+
+      @keyframes previewGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(20, 184, 166, 0.4);
+        }
+      }
+
+      .preview-label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .preview-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+      }
+
+      .preview-content strong {
+        color: var(--electric-teal);
+        font-size: 1.125rem;
+      }
+
+      .compatibility-score {
+        background: var(--gradient-xylence);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 600;
+        font-size: 0.875rem;
+      }
+
+      /* Auth Buttons */
+      .modal-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .auth-btn {
+        width: 100%;
+        padding: 0.875rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        font-family: 'Inter', sans-serif;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .auth-google {
+        background: white;
+        color: #1a1a1a;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .auth-google:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+      }
+
+      .auth-email {
+        background: var(--gradient-xylence);
+        color: white;
+        box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+      }
+
+      .auth-email:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4);
+      }
+
+      .auth-skip {
+        background: transparent;
+        color: var(--text-dim);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        padding: 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .auth-skip:hover {
+        color: var(--text-secondary);
+      }
+
+      .auth-icon {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-divider {
+        text-align: center;
+        color: var(--text-dim);
+        font-size: 0.875rem;
+        margin: 0.5rem 0;
+        position: relative;
+      }
+
+      .modal-divider span {
+        background: rgba(30, 41, 59, 0.9);
+        padding: 0 1rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .modal-divider::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Email Form */
+      .email-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          max-height: 0;
+        }
+        to {
+          opacity: 1;
+          max-height: 200px;
+        }
+      }
+
+      .modal-input {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: var(--text-primary);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .modal-input:focus {
+        outline: none;
+        border-color: var(--electric-teal);
+        background: rgba(15, 23, 42, 0.8);
+        box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+      }
+
+      .auth-submit {
+        background: var(--gradient-xylence);
+        color: white;
+        box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+      }
+
+      .auth-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4);
+      }
+
+      /* Trust Indicators */
+      .modal-footer {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .trust-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .trust-item {
+        font-size: 0.75rem;
+        color: var(--text-dim);
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      /* Responsive Modal */
+      @media (max-width: 640px) {
+        .modal-container {
+          padding: 2rem 1.5rem;
+        }
+
+        .modal-score-value {
+          font-size: 3rem;
+        }
+
+        .trust-indicators {
+          gap: 0.75rem;
+        }
       }
 
       /* ============================================
@@ -1860,13 +2359,144 @@
         <div class="quantum-loader-ring"></div>
         <div class="quantum-loader-ring"></div>
         <div class="quantum-loader-ring"></div>
-        <div class="loading-text">Pulse Processing...</div>
+        <div class="loading-text">Quantum Processing...</div>
+      </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal-overlay" id="registrationModal">
+      <div class="modal-container">
+        <!-- Close button -->
+        <button class="modal-close" onclick="closeModal()">×</button>
+
+        <!-- Success Animation -->
+        <div class="modal-success-animation">
+          <div class="success-orb">
+            <div class="success-orb-inner">
+              <span class="success-icon">🎉</span>
+            </div>
+            <div class="success-rings"></div>
+          </div>
+        </div>
+
+        <!-- Score Display -->
+        <div class="modal-score">
+          <h2 class="modal-score-title">Your Pulse Score</h2>
+          <div class="modal-score-value" id="modalScoreValue">0</div>
+          <div class="modal-score-badge">Top 15% of startups</div>
+        </div>
+
+        <!-- Value Props -->
+        <div class="modal-benefits">
+          <h3 class="modal-subtitle">Unlock your personalized dashboard to:</h3>
+          <div class="modal-benefit-list">
+            <div class="modal-benefit">
+              <span class="benefit-icon">🎯</span>
+              <div class="benefit-content">
+                <strong id="vcCount">31 VCs</strong> match your profile
+                <span class="benefit-detail"
+                  >See compatibility scores & contact info</span
+                >
+              </div>
+            </div>
+            <div class="modal-benefit">
+              <span class="benefit-icon">🤖</span>
+              <div class="benefit-content">
+                <strong>AI-powered weekly insights</strong>
+                <span class="benefit-detail"
+                  >Personalized recommendations to improve</span
+                >
+              </div>
+            </div>
+            <div class="modal-benefit">
+              <span class="benefit-icon">📈</span>
+              <div class="benefit-content">
+                <strong>Track your progress</strong>
+                <span class="benefit-detail"
+                  >Most founders improve 20+ points in 30 days</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Win Preview -->
+        <div class="modal-preview">
+          <div class="preview-card">
+            <span class="preview-label">🔥 Your top VC match</span>
+            <div class="preview-content">
+              <strong id="topVCName">Andreessen Horowitz</strong>
+              <span class="compatibility-score">92% compatibility</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auth Buttons -->
+        <div class="modal-actions">
+          <button class="auth-btn auth-google" onclick="continueWithGoogle()">
+            <svg class="auth-icon" viewBox="0 0 24 24" width="20" height="20">
+              <path
+                fill="#4285F4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="#34A853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              />
+              <path
+                fill="#EA4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              />
+            </svg>
+            Continue with Google
+          </button>
+
+          <button class="auth-btn auth-email" onclick="continueWithEmail()">
+            <span class="auth-icon">✉️</span>
+            Continue with email
+          </button>
+
+          <div class="modal-divider">
+            <span>or</span>
+          </div>
+
+          <!-- Email Form (Hidden by default) -->
+          <div class="email-form" id="emailForm" style="display: none">
+            <input
+              type="email"
+              class="modal-input"
+              id="modalEmail"
+              placeholder="your@email.com"
+              onkeypress="handleEmailKeypress(event)"
+            />
+            <button class="auth-btn auth-submit" onclick="submitEmail()">
+              Create Account <span>→</span>
+            </button>
+          </div>
+
+          <button class="auth-btn auth-skip" onclick="skipRegistration()">
+            Skip for now (lose progress)
+          </button>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="modal-footer">
+          <div class="trust-indicators">
+            <span class="trust-item">🔒 SSL Encrypted</span>
+            <span class="trust-item">🚀 2,847 startups</span>
+            <span class="trust-item">⚡ Setup in 30s</span>
+          </div>
+        </div>
       </div>
     </div>
 
     <script>
       // ============================================
-      // QUANTUM STATE MANAGEMENT
+      // XYLENCE STATE MANAGEMENT
       // ============================================
       let currentSection = 1;
       const totalSections = 5;
@@ -2135,7 +2765,7 @@
       function saveToLocalStorage() {
         try {
           localStorage.setItem(
-            'quantumStartupData',
+            'xylenceStartupData',
             JSON.stringify(startupData)
           );
         } catch (e) {
@@ -2145,7 +2775,7 @@
 
       function loadSavedData() {
         try {
-          const saved = localStorage.getItem('quantumStartupData');
+          const saved = localStorage.getItem('xylenceStartupData');
           if (saved) {
             startupData = JSON.parse(saved);
             populateForms();
@@ -2725,7 +3355,7 @@
       }
 
       // ============================================
-      // DATA EXPORT & SAVE
+      // DATA EXPORT & SAVE WITH REGISTRATION
       // ============================================
       async function saveAndContinue() {
         const email = document.getElementById('email').value.trim();
@@ -2742,29 +3372,258 @@
         startupData.contact.email = email;
         saveCurrentSection();
 
+        // Show the registration modal instead of saving directly
+        showRegistrationModal();
+      }
+
+      function showRegistrationModal() {
+        const modal = document.getElementById('registrationModal');
+        const score = startupData.analysis.score;
+
+        // Update modal with actual data
+        document.getElementById('modalScoreValue').textContent = score;
+
+        // Update VC count based on score
+        const vcCount = Math.floor((score / 100) * 47) + 10;
+        document.getElementById('vcCount').textContent = `${vcCount} VCs`;
+
+        // Select top VC based on industry
+        const topVCs = {
+          ai_ml: 'Andreessen Horowitz',
+          fintech: 'Sequoia Capital',
+          healthtech: 'NEA',
+          saas: 'Bessemer Venture Partners',
+          marketplace: 'Accel',
+          web3: 'Paradigm',
+          climate: 'Breakthrough Energy',
+          other: 'Y Combinator',
+        };
+
+        const topVC =
+          topVCs[startupData.basicInfo.industry] || 'Index Ventures';
+        document.getElementById('topVCName').textContent = topVC;
+
+        // Animate score counting
+        animateModalScore(score);
+
+        // Show modal
+        modal.classList.add('active');
+      }
+
+      function animateModalScore(targetScore) {
+        const scoreElement = document.getElementById('modalScoreValue');
+        let currentScore = 0;
+        const increment = targetScore / 30;
+
+        const timer = setInterval(() => {
+          currentScore += increment;
+          if (currentScore >= targetScore) {
+            currentScore = targetScore;
+            clearInterval(timer);
+          }
+          scoreElement.textContent = Math.round(currentScore);
+        }, 30);
+      }
+
+      function closeModal() {
+        const modal = document.getElementById('registrationModal');
+        modal.classList.remove('active');
+      }
+
+      async function continueWithGoogle() {
         showLoading(true);
 
-        // Simulate API call
-        await sendToBackend(startupData);
-
-        showLoading(false);
-
-        showNotification(
-          'success',
-          'Data Saved!',
-          'Redirecting to your dashboard...'
+        // Store data before OAuth
+        sessionStorage.setItem(
+          'pendingStartupData',
+          JSON.stringify(startupData)
         );
 
-        // Redirect after delay (in production)
-        setTimeout(() => {
-          console.log('Redirect to dashboard');
-          // window.location.href = '/dashboard';
-        }, 2000);
+        // Simulate Google OAuth (in production, use real OAuth)
+        await simulateOAuth('google');
+      }
+
+      function continueWithEmail() {
+        // Toggle email form
+        const emailForm = document.getElementById('emailForm');
+        const modalEmail = document.getElementById('modalEmail');
+
+        if (emailForm.style.display === 'none') {
+          emailForm.style.display = 'flex';
+          modalEmail.value = startupData.contact.email || '';
+          modalEmail.focus();
+        } else {
+          emailForm.style.display = 'none';
+        }
+      }
+
+      function handleEmailKeypress(event) {
+        if (event.key === 'Enter') {
+          submitEmail();
+        }
+      }
+
+      async function submitEmail() {
+        const email = document.getElementById('modalEmail').value.trim();
+
+        if (!email || !validateEmail(email)) {
+          showNotification(
+            'error',
+            'Invalid Email',
+            'Please enter a valid email address'
+          );
+          return;
+        }
+
+        showLoading(true);
+
+        // Create account with email
+        await createAccount({
+          email: email,
+          startupData: startupData,
+        });
+      }
+
+      function skipRegistration() {
+        if (
+          confirm("Are you sure? You'll lose all your progress and analysis.")
+        ) {
+          // Clear data and redirect
+          localStorage.removeItem('xylenceStartupData');
+          sessionStorage.clear();
+          window.location.href = '/';
+        }
+      }
+
+      async function simulateOAuth(provider) {
+        // In production, implement real OAuth flow
+        // For demo, simulate a successful auth
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        const userData = {
+          provider: provider,
+          email:
+            provider === 'google'
+              ? 'user@gmail.com'
+              : startupData.contact.email,
+          name: startupData.team.founderName || 'Founder',
+          id: generatePulseId(),
+        };
+
+        await createAccount(userData);
+      }
+
+      async function createAccount(userData) {
+        try {
+          // Combine user data with startup data
+          const completeData = {
+            user: userData,
+            startup: startupData,
+            createdAt: new Date().toISOString(),
+          };
+
+          // Simulate API call to create account
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+
+          console.log('Account created:', completeData);
+
+          // Store auth token (in production, get from backend)
+          localStorage.setItem('authToken', 'pulse_' + generatePulseId());
+          localStorage.setItem('userData', JSON.stringify(userData));
+
+          // Clear temporary data
+          localStorage.removeItem('pulseStartupData');
+          sessionStorage.removeItem('pendingStartupData');
+
+          showLoading(false);
+
+          // Show success and redirect
+          showNotification(
+            'success',
+            'Account Created!',
+            'Redirecting to your dashboard...'
+          );
+
+          // Redirect to dashboard after delay
+          setTimeout(() => {
+            // In production, redirect to actual dashboard
+            console.log('Redirect to dashboard with quick win');
+            // window.location.href = '/dashboard';
+
+            // For demo, show success state
+            showDashboardPreview();
+          }, 2000);
+        } catch (error) {
+          showLoading(false);
+          showNotification(
+            'error',
+            'Error',
+            'Failed to create account. Please try again.'
+          );
+          console.error('Account creation error:', error);
+        }
+      }
+
+      function showDashboardPreview() {
+        // Replace modal content with dashboard preview
+        const modal = document.getElementById('registrationModal');
+        const container = modal.querySelector('.modal-container');
+
+        container.innerHTML = `
+                <div class="dashboard-preview">
+                    <div class="preview-header">
+                        <h2 class="preview-title">🎉 Welcome to Your Dashboard!</h2>
+                        <p class="preview-subtitle">Here's your first quick win:</p>
+                    </div>
+                    
+                    <div class="quick-win-card">
+                        <div class="qw-badge">🔥 HOT MATCH</div>
+                        <div class="qw-content">
+                            <h3>${
+                              document.getElementById('topVCName').textContent
+                            }</h3>
+                            <div class="qw-metric">
+                                <span>92% Compatibility</span>
+                                <span class="qw-dot">•</span>
+                                <span>Actively investing</span>
+                            </div>
+                            <p class="qw-reason">
+                                They've invested in 3 similar startups in your stage and industry. 
+                                Perfect timing - they just closed a new $500M fund.
+                            </p>
+                            <a href="/echo/index.html" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                                View Full Dashboard →
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-stats">
+                        <div class="stat-mini">
+                            <span class="stat-mini-value">${
+                              startupData.analysis.score
+                            }</span>
+                            <span class="stat-mini-label">Your Score</span>
+                        </div>
+                        <div class="stat-mini">
+                            <span class="stat-mini-value">${
+                              Math.floor(
+                                (startupData.analysis.score / 100) * 47
+                              ) + 10
+                            }</span>
+                            <span class="stat-mini-label">VC Matches</span>
+                        </div>
+                        <div class="stat-mini">
+                            <span class="stat-mini-value">Top 15%</span>
+                            <span class="stat-mini-label">Ranking</span>
+                        </div>
+                    </div>
+                </div>
+            `;
       }
 
       async function sendToBackend(data) {
         // In production, replace with actual API call
-        const apiEndpoint = 'https://your-api.com/api/v2/startups';
+        const apiEndpoint = 'https://xylence.ai/api/v2/startups';
 
         try {
           // Simulated API call
@@ -2773,7 +3632,7 @@
           console.log('Data sent to backend:', data);
 
           // Clear local storage after successful save
-          localStorage.removeItem('quantumStartupData');
+          localStorage.removeItem('xylenceStartupData');
 
           return { success: true, id: data.metadata.id };
         } catch (error) {
